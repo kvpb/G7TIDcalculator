@@ -11,7 +11,7 @@
 *///	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <stdlib.h> // NULL, STRTOL
-#include <math.h> // pow
+#include <math.h> // pow, log10, floor
 #include <stdio.h> // PRINTF
 
 int main( int count_argument, char* vector_argument[] )
@@ -19,8 +19,7 @@ int main( int count_argument, char* vector_argument[] )
 	if ( count_argument != 3 )
 		exit( 1 );
 
-	printf("TID:\t%s\nSID:\t%s\nG7TID:\t%ld\n", vector_argument[ 1 ], vector_argument[ 2 ], ( ( (long) strtol( vector_argument[ 1 ], (char**) NULL, 10 ) ) /* TID */ + ( ( (long) strtol( vector_argument[ 2 ], (char**) NULL, 10 ) ) /* SID */ * ( (long) pow( 2, 16 ) ) ) % ( (long) pow( 10, 6 ) ) ) );
-
+	printf("TID:\t%s\nSID:\t%s\nG7TID:\t%ld\nG7SID:\t%ld\n", vector_argument[ 1 ], vector_argument[ 2 ], ( ((long) strtol( vector_argument[ 1 ], (char**) NULL, 10 ) ) /* TID */ + ( ((long) strtol( vector_argument[ 2 ], (char**) NULL, 10 ) ) /* SID */ * ((long) pow( 2, 16 ) ) ) % ((long) pow( 10, 6 ) ) ), (long) ((double) floor( ( ((double) strtol( vector_argument[ 1 ], (char**) NULL, 10 ) ) /* TID */ + ( ((double) strtol( vector_argument[ 2 ], (char**) NULL, 10 ) ) /* SID */ * ((double) pow( 2, 16 ) ) ) ) /* IDNo */ / ((double) pow( 10, (double) floor( ((double) log10( ((double) pow( 2, 32 ) ) - 1 ) /* 32-bit unsigned maximum value */ ) + 1 ) /* maximum length */ - ((double) floor( ((double) log10( ( ((double) pow( 2, 32 ) ) - 1 ) /* 32-bit unsigned maximum value */ ) ) + 1 ) /* maximum length */ - 6 /* G7TID length */ ) ) /* G7SID length */ ) ) ) );
 	return 0;
 }
 
