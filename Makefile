@@ -69,7 +69,7 @@ infodir = $(datarootdir)/info
 
 OBJ = $(SRC:$(srcdir)/%.c=$(objdir)/%.o)
 SRC = $(wildcard $(srcdir)/*.c)
-BIN = $(bindir)/g7tidc
+BIN = $(bindir)/cg7tid
 
 .PHONY: all clean
 all: $(BIN)
@@ -106,17 +106,13 @@ clean:
 -include $(OBJ:.o=.d)
 
 #	Makefile
-#	G8TID Calculator
+#	CG7TID (G7TID Calculator)
 #
-#	Karl V. P. B. `kvpb` AKA Karl Thomas George West `ktgw`
-#	+1 (DDD) DDD-DDDD
-#	+33 A BB BB BB BB
+#	Karl V. P. B. `kvpb`	AKA Karl Thomas George West `ktgw`
+#	+33 A BB BB BB BB		+1 (DDD) DDD-DDDD
 #	local-part@domain
-#	local-part@domain
-#	https://www.linkedin.com/in//
-#	https://twitter.com/ktgwkvpb
+#	https://x.com/ktgwkvpb
 #	https://github.com/kvpb
-#	https://vm.tiktok.com/ZSwAmcFh/
 
 #	Copyright 2022 Karl Vincent Pierre Bertin
 #
